@@ -24,6 +24,21 @@ for combo in combinations:
     total_gpa = ((current_gpa * current_units) + new_gpa_total) / (current_units + new_units)
     final_gpas.append(total_gpa)
 
+# Round final GPA outcomes before counting
+rounded_gpas = [round(gpa, 2) for gpa in final_gpas]
+
+# Count frequencies
+gpa_counter = Counter(rounded_gpas)
+total_outcomes = len(rounded_gpas)
+
+# Print likelihood of each GPA
+sorted_gpas = sorted(gpa_counter.items())
+print("Final GPA | Likelihood (%)")
+print("--------------------------")
+for gpa, count in sorted_gpas:
+    likelihood = (count / total_outcomes) * 100
+    print(f"{gpa:.2f}     | {likelihood:6.2f}")
+
 # Plot 1: Histogram of final GPA outcomes
 plt.figure(figsize=(10, 6))
 sns.histplot(final_gpas, bins=50, kde=True, color='skyblue', edgecolor='black')
