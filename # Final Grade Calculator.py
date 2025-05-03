@@ -3,7 +3,7 @@
 def calculate_required_final(current_grade, final_weight, target_grade):
     final_weight /= 100 
     required_final = (target_grade - (1 - final_weight) * current_grade) / final_weight
-    return min(max(required_final, 0), 100) 
+    return min(max(required_final, 0), 100.001) 
 def main():
     grade_cutoffs = {
         "A": 92.5,
