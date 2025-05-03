@@ -31,6 +31,8 @@ total_outcomes = len(term_gpas)
 
 # Print likelihood table
 sorted_gpas = sorted(gpa_counter.items())
+gpa_vals = [gpa for gpa, _ in sorted_gpas]
+prob_vals = [(count / total_outcomes) * 100 for _, count in sorted_gpas]
 print("Term GPA | Likelihood (%)")
 print("--------------------------")
 for gpa, count in sorted_gpas:
@@ -52,6 +54,19 @@ for label, value in benchmarks.items():
 plt.xlabel('Term GPA')
 plt.ylabel('Frequency')
 plt.title('Distribution and Likelihood of Term GPA Outcomes')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plot line chart of probabilities
+plt.figure(figsize=(10, 6))
+sns.lineplot(x=gpa_vals, y=prob_vals, marker='o', linewidth=2)
+for label, value in benchmarks.items():
+    if min_plot <= value <= max_plot:
+        plt.axvline(value, linestyle='--', linewidth=2, label=f'{label}: {value}', alpha=0.8)
+plt.xlabel('Term GPA')
+plt.ylabel('Probability (%)')
+plt.title('Probability of Each Term GPA Outcome')
 plt.legend()
 plt.grid(True)
 plt.show()
